@@ -22,7 +22,7 @@ return new class extends Migration
                 ->constrained('users', 'user_id')
                 ->cascadeOnDelete();
 
-            $table->string('todo_body');
+            $table->longText('todo_body');
             $table->softDeletes()->nullable();
             $table->dateTime('time');
             $table->timestamps();

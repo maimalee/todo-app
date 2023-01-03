@@ -13,5 +13,12 @@ class Todo extends Model
         'todo_body',
         'time',
     ];
+
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     protected $primaryKey = 'todo_id';
 }
