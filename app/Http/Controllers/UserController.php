@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
+    use HttpResponses;
     /**
      * Display a listing of the resource.
      *
