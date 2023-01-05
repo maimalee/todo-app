@@ -45,41 +45,23 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Title</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col" class="text-center">Action</th>
                                 </tr>
                                 </thead>
 
 
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>My First Todo</td>
-                                    <td>Pending</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>My First Todo</td>
-                                    <td>Pending</td>
-                                </tr>
+                                @foreach($todos as $todo)
+                                    <tr>
+                                        <td>{{$todo->todo_id}}</td>
+                                        <td><a href="" class="text-decoration-none">{{$todo->title}}</a></td>
 
-                                <tr>
-                                    <td>3</td>
-                                    <td>My First Todo</td>
-                                    <td>Pending</td>
-                                </tr>
+                                        <td>{{$todo->status}}</td>
+                                        <td class="text-center">...</td>
+                                    </tr>
+                                @endforeach
 
 
-                                <tr>
-                                    <td>4</td>
-                                    <td>My First Todo</td>
-                                    <td>Pending</td>
-                                </tr>
-
-                                <tr>
-                                    <td>5</td>
-                                    <td>My First Todo</td>
-                                    <td>Pending</td>
-                                </tr>
-                                </tbody>
                             </table>
 
                         </div>

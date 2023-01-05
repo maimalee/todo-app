@@ -21,6 +21,7 @@ Route::get('/', [HomeController::class, 'index'])
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
+
 Route::prefix('todo')
     ->middleware('auth')
     ->name('todo.')

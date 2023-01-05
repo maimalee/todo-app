@@ -21,6 +21,7 @@ class TodoFactory extends Factory
             'user_id' => User::all()->random()->user_id,
             'todo_body' => implode(',' , $this->faker->sentences(4)),
             'time' => $this->faker->dateTime(),
+            'title' => $this->faker->sentence(),
         ];
     }
 }
