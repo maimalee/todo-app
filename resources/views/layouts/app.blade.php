@@ -1,3 +1,9 @@
+@php
+    $showFooter ??= false;
+    $showTopBar ??= false;
+    $showSideBar ??= false;
+
+@endphp
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -77,6 +83,7 @@
             </div>
         </div>
     </nav>
+    @if($showSideBar)
     <!--left side of the body -->
     <div class="container-fluid">
         <div class="row flex-nowrap">
@@ -91,12 +98,16 @@
                                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
                             </a>
                         </li>
-                        <li>
 
-                        </li>
                         <li>
                             <a href="{{Route('todo.index')}}" class="nav-link px-0 align-middle" style="color:#f7fafc">
                                 <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Todo</span></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link align-middle px-0" style="color:#f7fafc">
+                                <i class="fs-4 bi-bell"></i> <span class="ms-1 d-none d-sm-inline">Notification</span>
+                            </a>
                         </li>
 
                         <li>
@@ -107,6 +118,7 @@
                     <hr>
                 </div>
             </div>
+            @endif
             <main class="">
                 @yield('content')
             </main>

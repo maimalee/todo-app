@@ -23,6 +23,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->longText('todo_body');
+            $table->string('status')->default('pending');
             $table->softDeletes()->nullable();
             $table->dateTime('time');
             $table->timestamps();
