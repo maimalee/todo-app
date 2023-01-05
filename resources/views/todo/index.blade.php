@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="m-lg-3">
-        <div class="card col-md-6 mt-4">
+        <div class="card col-md-8 mt-4">
             <div class="card-header bg-dark">
                 <div class="card">
                     <div class="card-header bg-white">
@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <div class="card col-md-6 mt-4">
+        <div class="card col-md-8 mt-4">
             <div class="card-body">
             <span class="mt-4">
                 <h4>
