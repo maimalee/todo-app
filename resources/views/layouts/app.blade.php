@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
           integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
             integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
@@ -31,22 +31,53 @@
 
 
     <!-- Sidebar  -->
-    <nav id="sidebar" style="background-color:black; color: white ">
-        <ul class="list-unstyled components">
-           Todo-Best-App
+    <nav id="sidebar" class="bg-drk" style="background-color:#101010; color: white; ">
+        <ul class="list-unstyled components" style="margin-left: 10px">
+           <div class="text-center mt-4">
+               Todo-Best-App
+           </div>
+            <div class="mt-3 text-center">
+                <img src="/images/suhail.jpg" alt="" class="rounded-circle" style="width: 100px; height: 100px">
+            </div>
+
             <li>
-                <a href="#">About</a>
+                <a href="/" class="text-decoration-none mt-4">
+                    <i class="fas fa-home me-4"></i>
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="{{Route('todo.index')}}" class="text-decoration-none">
+                    <i class="fas fa-tasks me-4"></i>
+                    Todo
+                </a>
             </li>
 
             <li>
-                <a href="#">Portfolio</a>
+                <a href="" class="text-decoration-none">
+                    <i class="fas fa-bell me-4"></i>
+                    Notification
+                    <span class="" style="margin-top: -25px">1</span>
+                </a>
             </li>
             <li>
-                <a href="#">Contact</a>
+                <a href="" class="text-decoration-none">
+                    <i class="fa fa-cog fa-spin me-4"></i>
+                    Account
+                </a>
             </li>
         </ul>
-        <hr>
+        <div class="mt-5 m-lg-3">
+            <!-- Owner info -->
+
+            {{Auth::user()['fullname']}} <br>
+            {{Auth::user()['email']}} <br>
+
+
+        </div>
     </nav>
+
+
     @endif
     <!-- Page Content  -->
     <div id="content">
@@ -72,7 +103,7 @@
                     <ul class="nav navbar-nav ml-auto">
                         @if(Auth::check())
                             <div class="m-lg-1">
-                                {{Auth::user()['username']}}
+                               @ {{Auth::user()['username']}}
                             </div>
                             <form action="{{Route('logout')}}" method="POST">
                                 @csrf

@@ -11,9 +11,9 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="text-end">
-                                    <button class="btn btn-dark">
+                                    <a href="{{Route('todo.create')}}" class="btn btn-dark">
                                         +
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                                 @foreach($todos as $todo)
                                     <tr>
                                         <td>{{$todo->todo_id}}</td>
-                                        <td><a href="" class="text-decoration-none">{{$todo->title}}</a></td>
+                                        <td><a href="{{Route('todo.show', $todo['todo_id'])}}" class="text-decoration-none">{{$todo->title}}</a></td>
 
                                         <td>{{$todo->status}}</td>
                                         <td class="text-center">...</td>

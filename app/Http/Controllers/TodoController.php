@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTodoRequest;
 use App\Http\Resources\TodoResources;
 use App\Models\Todo;
 use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
@@ -34,7 +32,7 @@ class TodoController extends Controller
             ->where('user_id', Auth::user()['user_id'])
             ->get();
 
-        return view('todo.index',[
+        return view('todo.index', [
             'todos' => $todos,
             'showFooter' => true,
             'showTopBar' => true,
@@ -49,38 +47,46 @@ class TodoController extends Controller
      */
     public function create()
     {
-        return view('todo.create');
+        return view('todo.add');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return TodoResources
+     * @return string
      */
-    public function store(StoreTodoRequest $request)
+    public function store(Request $request)
     {
-        $request->validated($request->all());
-
-        $todo = Todo::query()->create([
-            'user_id' => Auth::user()['user_id'],
-//            'title' => $request['title']
-            'todo_body' => $request['todo_body'],
-            'time' => $request['timeDate']
+        $data = $request->validate([
+            'title' => ['required', 'string'],
+            'todo_body' => ['required', 'string'],
+            'timeDate' => ['required'],
         ]);
 
-        return new TodoResources($todo);
+        Todo::query()->create([
+            'user_id' => Auth::user()['user_id'],
+            'title' => $data['title'],
+            'todo_body' => $data['todo_body'],
+            'time' => $data['timeDate'],
+        ]);
+
+        return redirect()->route('todo.index');
     }
 
     /**
      * Display the specified resource.
      *
      * @param int $id
-     * @return TodoResources
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show(Todo $todo)
+    public function show(int $id)
     {
-        return $this->isNotAuthorize($todo) ? $this->isNotAuthorize($todo) : new TodoResources($todo);
+        $todo =  Todo::query()->find('$id');
+
+        return view('todo.show',[
+            'todo' => $todo,
+        ]);
     }
 
     /**
