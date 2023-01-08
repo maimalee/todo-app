@@ -1,4 +1,3 @@
-
 @php use Illuminate\Support\Facades\Auth; @endphp
     <!DOCTYPE html>
 <html>
@@ -29,54 +28,70 @@
 <div class="wrapper">
     @if(Auth::check())
 
+        <!-- Sidebar  -->
+        <nav id="sidebar" class="bg-drk" style="background-color:#101010; color: white; ">
+            <ul class="list-unstyled components" style="margin-left: 10px">
+                <div class="text-center mt-4">
+                    Todo-Best-App
+                </div>
+                <div class="mt-3 text-center">
+                    <img src="/images/suhail.jpg" alt="" class="rounded-circle" style="width: 100px; height: 100px">
+                </div>
+                @if(Auth::user()['role'] != 'admin')
+                    <li>
+                        <a href="/" class="text-decoration-none mt-4">
+                            <i class="fas fa-home me-4"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{Route('todo.index')}}" class="text-decoration-none">
+                            <i class="fas fa-tasks me-4"></i>
+                            Todo
+                        </a>
+                    </li>
 
-    <!-- Sidebar  -->
-    <nav id="sidebar" class="bg-drk" style="background-color:#101010; color: white; ">
-        <ul class="list-unstyled components" style="margin-left: 10px">
-           <div class="text-center mt-4">
-               Todo-Best-App
-           </div>
-            <div class="mt-3 text-center">
-                <img src="/images/suhail.jpg" alt="" class="rounded-circle" style="width: 100px; height: 100px">
+                    <li>
+                        <a href="" class="text-decoration-none">
+                            <i class="fas fa-bell me-4"></i>
+                            Notification
+                            <span class="badge bg-white" style="color: black">1</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="text-decoration-none">
+                            <i class="fa fa-cog fa-spin me-4"></i>
+                            Account
+                        </a>
+                    </li>
+
+                @endif
+
+                <!-- Admin section -->
+                <li>
+                    <a href="{{Route('admin.users')}}" class="text-decoration-none">
+                        <i class="fas fa-bell me-4"></i>
+                        Users
+                        <span class="badge bg-white" style="color: black">1</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="text-decoration-none">
+                        <i class="fa fa-cog fa-spin me-4"></i>
+                        Todo
+                    </a>
+                </li>
+
+            </ul>
+            <div class="mt-5 m-lg-3">
+                <!-- Owner info -->
+
+                {{Auth::user()['fullname']}} <br>
+                {{Auth::user()['email']}} <br>
+
+
             </div>
-
-            <li>
-                <a href="/" class="text-decoration-none mt-4">
-                    <i class="fas fa-home me-4"></i>
-                    Home
-                </a>
-            </li>
-            <li>
-                <a href="{{Route('todo.index')}}" class="text-decoration-none">
-                    <i class="fas fa-tasks me-4"></i>
-                    Todo
-                </a>
-            </li>
-
-            <li>
-                <a href="" class="text-decoration-none">
-                    <i class="fas fa-bell me-4"></i>
-                    Notification
-                    <span class="" style="margin-top: -25px">1</span>
-                </a>
-            </li>
-            <li>
-                <a href="" class="text-decoration-none">
-                    <i class="fa fa-cog fa-spin me-4"></i>
-                    Account
-                </a>
-            </li>
-        </ul>
-        <div class="mt-5 m-lg-3">
-            <!-- Owner info -->
-
-            {{Auth::user()['fullname']}} <br>
-            {{Auth::user()['email']}} <br>
-
-
-        </div>
-    </nav>
-
+        </nav>
 
     @endif
     <!-- Page Content  -->
@@ -84,7 +99,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-            @if(Auth::check())
+                @if(Auth::check())
                     <button type="button" id="sidebarCollapse" class="btn btn-dark">
                         <i class="fas fa-align-left"></i>
                         <span>Toggle Sidebar</span>
@@ -95,15 +110,14 @@
                         <i class="fas fa-align-justify"></i>
                     </button>
 
-
-            @endif
+                @endif
 
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="nav navbar-nav ml-auto">
                         @if(Auth::check())
                             <div class="m-lg-1">
-                               @ {{Auth::user()['username']}}
+                                @ {{Auth::user()['username']}}
                             </div>
                             <form action="{{Route('logout')}}" method="POST">
                                 @csrf
@@ -150,7 +164,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
