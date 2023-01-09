@@ -11,7 +11,7 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="text-end">
-                                    <a href="" class="btn btn-dark">
+                                    <a href="{{Route('admin.addUser')}}" class="btn btn-dark">
                                         +
                                     </a>
                                 </div>
@@ -101,7 +101,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <!-- Deleted Users -->

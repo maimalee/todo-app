@@ -1,4 +1,6 @@
-@php use Illuminate\Support\Facades\Auth; @endphp
+@php use Illuminate\Support\Facades\Auth;
+
+@endphp
     <!DOCTYPE html>
 <html>
 
@@ -8,6 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>Collapsible sidebar using Bootstrap 4</title>
+    <link rel="shortcut icon" type="image/png" href="/assets/images/suhail.ico">
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
@@ -46,7 +49,7 @@
                     </li>
                     <li>
                         <a href="{{Route('todo.index')}}" class="text-decoration-none">
-                            <i class="fas fa-tasks me-4"></i>
+                            <i class="fas fa-book-open me-4"></i>
                             Todo
                         </a>
                     </li>
@@ -69,16 +72,26 @@
 
                 <!-- Admin section -->
                 <li>
-                    <a href="{{Route('admin.users')}}" class="text-decoration-none">
+                    <a href="{{Route('admin.users')}}" class="text-decoration-none mt-4">
                         <i class="fas fa-bell me-4"></i>
                         Users
-                        <span class="badge bg-white" style="color: black">1</span>
+                      @if($global['users'] ?? 0 > 0)
+                            <span class="badge bg-white" style="color: #1a202c">{{$global['users']}}</span>
+                      @endif
+                        </a>
+                </li>
+
+                <li>
+                    <a href="{{Route('admin.todo')}}" class="text-decoration-none">
+                        <i class="fa fa-book-open me-4"></i>
+                        Todo
                     </a>
                 </li>
+
                 <li>
                     <a href="" class="text-decoration-none">
                         <i class="fa fa-cog fa-spin me-4"></i>
-                        Todo
+                        Setting
                     </a>
                 </li>
 

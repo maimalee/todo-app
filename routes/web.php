@@ -37,8 +37,12 @@ Route::prefix('admin')
     ->middleware('auth')
     ->name('admin.')
     ->group(function () {
+        Route::get('/', [AdminController::class, 'index'])->name('index');
         Route::get('/users', [AdminController::class, 'showUsers'])->name('users');
+        Route::match(['get','post'], 'add',[AdminController::class,'addUser'])->name('addUser');
         Route::get('/{id}/delete', [AdminController::class, 'softDelete'])->name('delete');
         Route::match(['post', 'get'], '/{user_id}/edit', [AdminController::class, 'editUser'])->name('edit');
-        Route::get('/{user_id/recover', [AdminController::class, 'recoverUser'])->name('recover');
+        Route::get('/{id}/recover', [AdminController::class, 'recoverUser'])->name('recover');
+
+        Route::get('/todo',[AdminController::class, 'todoIndex'])->name('todo');
     });
