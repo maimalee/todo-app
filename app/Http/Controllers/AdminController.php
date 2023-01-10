@@ -8,6 +8,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -119,10 +120,14 @@ class AdminController extends Controller
 
     public function todoIndex()
     {
-        $todos = Todo::query()->get();
+        $todos = Todo::query()
+            ->where('deleted_at' ,  null)
+            ->get();
+        $trashedTodos = Todo::onlyTrashed()->get();
 
         return \view('admin.todo.index', [
             'todos' => $todos,
+            'trashedTodos' => $trashedTodos,
         ]);
     }
 
@@ -151,5 +156,50 @@ class AdminController extends Controller
         }
 
         return \view('admin.users.add');
+    }
+
+    public function showTodo(int $id)
+    {
+        $todo = Todo::query()->find($id);
+
+        return \view('admin.todo.show',[
+            'todo' => $todo,
+        ]);
+    }
+
+    public function editTodo(Request $request)
+    {
+        if ($request->isMethod('post')){
+            $data = $request->validate([
+                'title' => ['required', 'string'],
+                'todo_body' => ['required', 'string'],
+                'timeDate' => ['required'],
+
+            ]);
+
+            $todo = Todo::query()->find($request['id']);
+            $todo->update($data);
+            return to_route('admin.todo');
+        }
+
+        $todo = Todo::query()->find($request['id']);
+        return \view('admin.todo.edit',[
+            'todo' =>$todo,
+        ]);
+    }
+
+    public function destroyTodo($id)
+    {
+        $todo = Todo::query()->find($id);
+        $todo->update(['deleted_at' => time()]);
+        return to_route('admin.todo');
+    }
+
+    public function recoverTodo($id)
+    {
+        $todo = Todo::onlyTrashed()->find($id);
+        $todo->restore();
+
+        return to_route('admin.todo');
     }
 }

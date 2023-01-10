@@ -130,7 +130,7 @@
                     <ul class="nav navbar-nav ml-auto">
                         @if(Auth::check())
                             <div class="m-lg-1">
-                                @ {{Auth::user()['username']}}
+                                {{Auth::user()['username']}}
                             </div>
                             <form action="{{Route('logout')}}" method="POST">
                                 @csrf

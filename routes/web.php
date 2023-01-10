@@ -45,4 +45,8 @@ Route::prefix('admin')
         Route::get('/{id}/recover', [AdminController::class, 'recoverUser'])->name('recover');
 
         Route::get('/todo',[AdminController::class, 'todoIndex'])->name('todo');
+        Route::get('/todo/{id}/show', [AdminController::class, 'showTodo'])->name('showTodo');
+        Route::match(['get', 'post'], '/todo/{id}/edit', [AdminController::class, 'editTodo'])->name('editTodo');
+        Route::get('/todo/{id}/delete', [AdminController::class, 'destroyTodo'])->name('deleteTodo');
+        Route::get('/todo/{id}/rcover', [AdminController::class, 'recoverTodo'])->name('recoverTodo');
     });
