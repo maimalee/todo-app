@@ -80,9 +80,9 @@ class TodoController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show(int $id)
+    public function show($id)
     {
-        $todo =  Todo::query()->find('$id');
+        $todo =  Todo::query()->find($id);
 
         return view('todo.show',[
             'todo' => $todo,
@@ -97,7 +97,10 @@ class TodoController extends Controller
      */
     public function edit($id)
     {
-        return view('todo.edit');
+        $todo = Todo::query()->find($id);
+        return view('todo.edit',[
+            'todo' =>$todo,
+        ]);
     }
 
     /**

@@ -68,7 +68,7 @@
                         </a>
                     </li>
 
-                @endif
+                @else
 
                 <!-- Admin section -->
                 <li>
@@ -96,6 +96,7 @@
                 </li>
 
             </ul>
+            @endif
             <div class="mt-5 m-lg-3">
                 <!-- Owner info -->
 

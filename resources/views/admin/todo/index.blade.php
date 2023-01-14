@@ -90,8 +90,7 @@
                                 @foreach($trashedTodos as $trashedTodo)
                                     <tr>
                                         <td>{{$trashedTodo->todo_id}}</td>
-                                        <td><a href="{{Route('admin.showTodo', $trashedTodo->todo_id)}}"
-                                               class="text-decoration-none">{{$trashedTodo->title}}</a></td>
+                                        <td>{{$trashedTodo->title}}</td>
 
                                         <td>{{$trashedTodo->status}}</td>
                                         <td class="text-center">

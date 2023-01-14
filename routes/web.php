@@ -31,6 +31,7 @@ Route::prefix('todo')
         Route::get('/create', [TodoController::class, 'create'])->name('create');
         Route::post('/store', [TodoController::class, 'store'])->name('store');
         Route::get('/{id}/show', [TodoController::class, 'show'])->name('show');
+        Route::get('/{id}/edit', [TodoController::class, 'edit'])->name('edit');
     });
 
 Route::prefix('admin')
@@ -48,5 +49,5 @@ Route::prefix('admin')
         Route::get('/todo/{id}/show', [AdminController::class, 'showTodo'])->name('showTodo');
         Route::match(['get', 'post'], '/todo/{id}/edit', [AdminController::class, 'editTodo'])->name('editTodo');
         Route::get('/todo/{id}/delete', [AdminController::class, 'destroyTodo'])->name('deleteTodo');
-        Route::get('/todo/{id}/rcover', [AdminController::class, 'recoverTodo'])->name('recoverTodo');
+        Route::get('/todo/{id}/recover', [AdminController::class, 'recoverTodo'])->name('recoverTodo');
     });
