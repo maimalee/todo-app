@@ -30,10 +30,12 @@ class TodoController extends Controller
 
         $todos = Todo::query()
             ->where('user_id', Auth::user()['user_id'])
+            ->where('deleted_at', null)
             ->get();
-
+        $totalTodos = $todos->count();
         return view('todo.index', [
             'todos' => $todos,
+            'totalTodo' => $totalTodos,
             'showFooter' => true,
             'showTopBar' => true,
             'showSideBar' => true,
@@ -93,10 +95,21 @@ class TodoController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
+        if ($request->isMethod('post')){
+            $data = $request->validate([
+                'title' => ['required', 'string', 'min:3', 'max:100'],
+                'todo_body' => ['required', 'string', 'min:3', 'max:1000'],
+                'timeDate' => ['required'],
+            ]);
+
+            $todo = Todo::query()->find($id);
+            $todo->update($data);
+            return to_route('todo.show', $id);
+        }
         $todo = Todo::query()->find($id);
         return view('todo.edit',[
             'todo' =>$todo,
@@ -120,13 +133,13 @@ class TodoController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Todo $todo)
+    public function destroy($id)
     {
-
-        $todo->delete();
-        return response(null, 204);
+       $todo  = Todo::query()->find($id);
+       $todo->update(['deleted_at'=> time()]);
+       return to_route('todo.index');
 
     }
 

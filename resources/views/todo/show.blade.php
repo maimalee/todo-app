@@ -42,7 +42,10 @@
                            </div>
                       </div>
                  </span>
-                <a href="{{Route('todo.edit', $todo->todo_id)}}" class="btn btn-dark float-right" style="color: white">
+                <a href="{{Route('todo.index')}}" class="btn btn-dark float-right" style="color: white; margin-right: 3px;">
+                    Back
+                </a>
+                <a href="{{Route('todo.edit', $todo->todo_id)}}" class="btn btn-dark float-right" style="color: white; margin-right: 6px;">
                     Edit
                 </a>
             </div>

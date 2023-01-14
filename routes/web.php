@@ -31,7 +31,8 @@ Route::prefix('todo')
         Route::get('/create', [TodoController::class, 'create'])->name('create');
         Route::post('/store', [TodoController::class, 'store'])->name('store');
         Route::get('/{id}/show', [TodoController::class, 'show'])->name('show');
-        Route::get('/{id}/edit', [TodoController::class, 'edit'])->name('edit');
+        Route::match(['get','post'],'/{id}/edit', [TodoController::class, 'edit'])->name('edit');
+        Route::get('/{id}/delete', [TodoController::class, 'destroy'])->name('delete');
     });
 
 Route::prefix('admin')
